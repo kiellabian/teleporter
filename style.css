@@ -13,4 +13,9 @@ html, body {
     z-index: 1;
     right: 60px;
     top: 10px;
+    border: none;
+    padding: 5px;
+    color: white;
+    background: black;
+    opacity: 0.8;
 }
