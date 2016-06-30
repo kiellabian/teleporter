@@ -7,3 +7,10 @@ html, body {
 #view {
   height: 100%;
 }
+
+#teleport {
+    position: absolute;
+    z-index: 1;
+    right: 60px;
+    top: 10px;
+}

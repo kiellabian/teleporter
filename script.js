@@ -2,7 +2,11 @@ var google = google;
 var streetviewService;
 var latitude = 10.3433083;
 var longitude = 123.9204285;
-var radius = 10000;
+var radius = 1;
+var streetView = document.getElementById('view');
+var button = document.getElementById('teleport');
+var audio = new Audio('music.mp3');
+var first = true;
 
 function init() {
     streetviewService = new google.maps.StreetViewService;
@@ -10,7 +14,6 @@ function init() {
 }
 
 function getRandomPlaceWithPanorama() {
-    randomizeLatLong();
     var location = {
         location: { lat: latitude, lng: longitude },
         preference: google.maps.StreetViewPreference.BEST,
@@ -19,10 +22,10 @@ function getRandomPlaceWithPanorama() {
     streetviewService.getPanorama(
         location,
         function(result, status) {
-            console.log(latitude, longitude, status);
             if (status === google.maps.StreetViewStatus.OK) {
                 createPanorama(result);
             } else {
+                randomizeLatLong();
                 getRandomPlaceWithPanorama();
             }
         });
@@ -44,5 +47,15 @@ function createPanorama(result) {
         pano: result.location.pano
     };
     var panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('view'), data);
+        streetView, data);
+    if (!first) {
+        audio.play();
+    }
 }
+
+button.addEventListener('click', function() {
+    radius = 10000;
+    randomizeLatLong();
+    getRandomPlaceWithPanorama();
+    first = false;
+});
