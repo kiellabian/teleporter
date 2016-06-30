@@ -7,6 +7,7 @@ var streetView = document.getElementById('view');
 var button = document.getElementById('teleport');
 var audio = new Audio('music.mp3');
 var first = true;
+var teleportLock = false;
 
 function init() {
     streetviewService = new google.maps.StreetViewService;
@@ -51,11 +52,15 @@ function createPanorama(result) {
     if (!first) {
         audio.play();
     }
+    teleportLock = false;
 }
 
 button.addEventListener('click', function() {
-    radius = 10000;
-    randomizeLatLong();
-    getRandomPlaceWithPanorama();
-    first = false;
+    if (teleportLock === false) {
+        teleportLock = true;
+        radius = 10000;
+        randomizeLatLong();
+        getRandomPlaceWithPanorama();
+        first = false;
+    }
 });
