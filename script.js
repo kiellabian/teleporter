@@ -2,6 +2,7 @@ var google = google;
 var streetviewService;
 var latitude = 10.3433083;
 var longitude = 123.9204285;
+var radius = 10000;
 
 function init() {
     streetviewService = new google.maps.StreetViewService;
@@ -12,7 +13,8 @@ function getRandomPlaceWithPanorama() {
     randomizeLatLong();
     var location = {
         location: { lat: latitude, lng: longitude },
-        preference: google.maps.StreetViewPreference.BEST
+        preference: google.maps.StreetViewPreference.BEST,
+        radius: radius
     };
     streetviewService.getPanorama(
         location,
