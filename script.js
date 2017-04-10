@@ -2,7 +2,7 @@ var google = google;
 var streetviewService;
 var latitude = 10.3433083;
 var longitude = 123.9204285;
-var radius = 1;
+var radius = 10000;
 var streetView = document.getElementById('view');
 var button = document.getElementById('teleport');
 var audio = new Audio('music.mp3');
@@ -58,7 +58,6 @@ function createPanorama(result) {
 button.addEventListener('click', function() {
     if (teleportLock === false) {
         teleportLock = true;
-        radius = 10000;
         randomizeLatLong();
         getRandomPlaceWithPanorama();
         first = false;
